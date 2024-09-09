@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "serve": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "netlify deploy --prod"
   },
   "keywords": [],
   "author": "arun",
@@ -14,11 +15,14 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
-    "express": "^4.18.1",
+    "express": "^4.19.2",
     "mongoose": "^6.4.1",
     "multer": "^1.4.5-lts.1",
+    "netlify-cli": "^17.35.0",
+    "netlify-lambda": "^2.0.16",
     "nodemailer": "^6.7.6",
     "nodemon": "^2.0.22",
+    "serverless-http": "^3.2.0",
     "uuid": "^8.3.2"
   },
   "description": ""

@@ -4,6 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const path = require("path");
 const cors = require("cors");
+const serverless = require("serverless-http");
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -26,6 +27,9 @@ app.get('/', (req, res, next) => {
   res.status(200).json({ msg: "listening" })
 })
 
+
+app.use("/.netlify/functions/app", require("./routes/files"));
+module.exports.handler = serverless(app);
 app.use("/api/files", require("./routes/files"));
 app.use("/files", require("./routes/show"));
 app.use("/files/download", require("./routes/download"));
