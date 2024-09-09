@@ -22,6 +22,9 @@ app.use(cors(corsOptions));
 //Template Engine
 app.set("views", path.join(__dirname + "/views"));
 app.set("view engine", "ejs");
+app.get('/', (req, res, next) => {
+  res.status(200).json({ msg: "listening" })
+})
 
 app.use("/api/files", require("./routes/files"));
 app.use("/files", require("./routes/show"));
