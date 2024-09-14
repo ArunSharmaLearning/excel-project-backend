@@ -16,30 +16,27 @@ let storage = multer.diskStorage({
 });
 
 let upload = multer({ storage, limits: { fileSize: 1000000 * 100 } }).single(
-  "myfile"
+  "file"
 );
 
 router.get("/test", (req, res) => {
-
   res.status(200).send("HELLO WORLD")
-
 })
 
 router.post("/", (req, res) => {
+  console.log("REQ", req.file, req.body)
   upload(req, res, async (err) => {
+    console.log("REQ2", req.file, req.body)
     if (!req.file) {
-      return res.json({ error: "All fields are required" });
+      return res.json({ error: "All fields are required!!!!" });
     }
 
     if (err) {
       return res.status(500).send({ error: err.message });
     }
-
-    const filters = req.body;
-    filters.includePhoneNo = JSON.parse(filters.includePhoneNo);
-    processFile(path.join(process.env.BASE_API_URL, req.file.path), filters)
+    console.log("REACHED", req.file.path)
     res.json({
-      file: path.join(process.env.BASE_API_URL, 'uploads', 'output.xlsx')
+      file: req.file.filename
     });
   });
 });

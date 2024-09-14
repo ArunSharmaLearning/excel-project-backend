@@ -28,7 +28,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.use("/api/files", require("./routes/files"));
-app.use("/api/files/download", require("./routes/download"));
+app.use("/api/download", require("./routes/download"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

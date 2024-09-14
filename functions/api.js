@@ -14,10 +14,6 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // to handle URL-encoded form data
 
-// const connectDB = require("./config/db");
-// connectDB();
-
-//COrs
 const corsOptions = {
 	origin: "*",
 };
@@ -31,8 +27,8 @@ router.get('/', (req, res, next) => {
 	res.status(200).json({ msg: "listening" })
 })
 
-app.use(NETLIFY_PATH + "/api/files", require("../routes/files"));
-app.use(NETLIFY_PATH + "/files/download", require("../routes/download"));
+app.use(NETLIFY_PATH + "/files", require("../routes/files"));
+app.use(NETLIFY_PATH + "/download", require("../routes/download"));
 
 
 
