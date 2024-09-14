@@ -44,7 +44,7 @@ async function processFile(file, filters) {
 		XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, 'wp_updated_sheet');
 
 		// Step 6: Write the new workbook to a file
-		XLSX.writeFile(newWorkbook, path.join(process.env.BASE_API_URL, 'uploads', 'output.xlsx')); // Replace 'output.xlsx' with your desired output file name
+		XLSX.writeFile(newWorkbook, path.join('uploads', 'output.xlsx')); // Replace 'output.xlsx' with your desired output file name
 
 		console.log('New Excel file created successfully.');
 	}

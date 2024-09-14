@@ -5,8 +5,8 @@ const { processFile } = require("../controller/apply-filter");
 router.post("/:name", async (req, res) => {
   console.log("PARAM", req.params, req.body)
   const filters = req.body
-  processFile(path.join(process.env.BASE_API_URL, 'uploads', req.params.name), filters)
-  res.status(200).download(path.join(process.env.BASE_API_URL, 'uploads', 'output.xlsx'));
+  processFile(path.join('uploads', req.params.name), filters)
+  res.status(200).download(path.join('uploads', 'output.xlsx'));
 });
 
 module.exports = router;
