@@ -32,7 +32,6 @@ router.get('/', (req, res, next) => {
 })
 
 app.use(NETLIFY_PATH + "/api/files", require("../routes/files"));
-app.use(NETLIFY_PATH + "/files", require("../routes/show"));
 app.use(NETLIFY_PATH + "/files/download", require("../routes/download"));
 
 

@@ -1,15 +1,8 @@
 const router = require("express").Router();
-const File = require("../models/file");
+const path = require('path')
 
-router.get("/:uuid", async (req, res) => {
-  const file = await File.findOne({ uuid: req.params.uuid });
-  // Link expired
-  if (!file) {
-    return res.render("download", { error: "Link has been expired." });
-  }
-
-  const filePath = `${__dirname}/../${file.path}`;
-  res.download(filePath);
+router.get("/", async (req, res) => {
+  res.download(path.join(process.env.BASE_API_URL, 'uploads', 'output.xlsx'));
 });
 
 module.exports = router;

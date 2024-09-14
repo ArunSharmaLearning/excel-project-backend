@@ -3,6 +3,7 @@ const multer = require("multer");
 const path = require("path");
 const File = require("../models/file");
 const { v4: uuidv4 } = require("uuid");
+const { processFile } = require("../controller/apply-filter");
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
@@ -16,7 +17,7 @@ let storage = multer.diskStorage({
 
 let upload = multer({ storage, limits: { fileSize: 1000000 * 100 } }).single(
   "myfile"
-); //100mb
+);
 
 router.get("/test", (req, res) => {
 
@@ -26,7 +27,6 @@ router.get("/test", (req, res) => {
 
 router.post("/", (req, res) => {
   upload(req, res, async (err) => {
-    //Validate request
     if (!req.file) {
       return res.json({ error: "All fields are required" });
     }
@@ -35,15 +35,12 @@ router.post("/", (req, res) => {
       return res.status(500).send({ error: err.message });
     }
 
-    //Store in Database
-    const file = new File({
-      filename: req.file.filename,
-      path: req.file.path,
-      size: req.file.size,
-      uuid: uuidv4(),
+    const filters = req.body;
+    filters.includePhoneNo = JSON.parse(filters.includePhoneNo);
+    processFile(path.join(process.env.BASE_API_URL, req.file.path), filters)
+    res.json({
+      file: path.join(process.env.BASE_API_URL, 'uploads', 'output.xlsx')
     });
-    const response = await file.save();
-    res.json({ file: `${process.env.APP_BASE_URL}/files/${response.uuid}` });
   });
 });
 
