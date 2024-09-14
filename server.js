@@ -4,7 +4,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const path = require("path");
 const cors = require("cors");
-const serverless = require("serverless-http");
+
+//COrs
+const corsOptions = {
+  origin: "*",
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -13,12 +19,7 @@ app.use(express.urlencoded({ extended: true })); // to handle URL-encoded form d
 // const connectDB = require("./config/db");
 // connectDB();
 
-//COrs
-const corsOptions = {
-  origin: "*",
-};
 
-app.use(cors(corsOptions));
 
 //Template Engine
 app.set("views", path.join(__dirname + "/views"));
